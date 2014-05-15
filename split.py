@@ -11,7 +11,7 @@ storage folder
 import os
 import shutil
 
-CWD = 'REPLACE_WITH_DIR_CONTAINING_ODK_BRIEFCASE_FOLDER'
+CWD = os.path.dirname(os.path.realpath(__file__))
 form_name = 'Informal Settlement Profile'
 form_folder = os.path.join(
     CWD,
@@ -20,12 +20,14 @@ form_folder = os.path.join(
 )
 form_xml = os.path.join(form_folder, '%s.xml' % form_name)
 countries = [
-    u'kenya', u'malawi', u'namibia', u'southafrica', u'uganda', 'ghana']
+    u'kenya', u'malawi', u'namibia', u'southafrica', u'uganda', 'ghana',
+    u'usa', 'zimbabwe'
+]
 
 uuid_dict = {}
 for country in countries:
     uuids = []
-    with open(country) as f:
+    with open('%s.csv' % country) as f:
         for uuid in f.readlines():
             uuids.append(uuid.strip().replace(':', ''))
     uuid_dict[country] = uuids
